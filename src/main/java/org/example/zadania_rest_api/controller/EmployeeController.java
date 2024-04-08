@@ -33,4 +33,10 @@ public class EmployeeController {
     public Optional<Employee> getEmployeeByEmployeeId(@PathVariable Long employeeId) {
         return employeeService.findById(employeeId);
     }
+//
+//    @PostMapping("/add")
+//
+//    @DeleteMapping("/delete")
+//
+//    @PutMapping("/put")
 }
