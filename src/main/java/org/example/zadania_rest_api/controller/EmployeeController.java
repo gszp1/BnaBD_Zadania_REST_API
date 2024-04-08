@@ -25,7 +25,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/id")
-    public Optional<Employee> getEmployeeById(@RequestParam Long employeeId) {
+    public Optional<Employee> getEmployeeById(@RequestParam("employeeId") Long employeeId) {
         return employeeService.findById(employeeId);
     }
 
@@ -33,10 +33,19 @@ public class EmployeeController {
     public Optional<Employee> getEmployeeByEmployeeId(@PathVariable Long employeeId) {
         return employeeService.findById(employeeId);
     }
-//
-//    @PostMapping("/add")
-//
-//    @DeleteMapping("/delete")
-//
-//    @PutMapping("/put")
+
+    @PostMapping("/add")
+    public Employee addEmployee(@RequestBody Employee employee) {
+        return employeeService.save(employee);
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteEmployeeById(@RequestParam("employeeId") Long employeeId) {
+        employeeService.deleteById(employeeId);
+    }
+
+    @PutMapping("/update")
+    public Employee updateEmployee(@RequestBody Employee employee) {
+        return employeeService.save(employee);
+    }
 }
