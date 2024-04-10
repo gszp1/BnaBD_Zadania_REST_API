@@ -25,15 +25,25 @@ public class EmployeeController {
         return employeeService.findAll();
     }
 
+    @GetMapping("/all/salaryBetween")
+    public List<Employee> getEmployeesBySalaryBetween(@RequestParam("minSalary") BigDecimal minSalary,
+                                                      @RequestParam("maxSalary") BigDecimal maxSalary) {
+        return employeeService.findBySalaryBetween(minSalary, maxSalary);
+    }
+
+    @GetMapping("/all/salarySortedAsc")
+    public List<Employee> getAllEmployeesBySalaryAsc() {
+        return employeeService.findAllOrderBySalaryAsc();
+    }
+
+    @GetMapping("/all/salarySortedDesc")
+    public List<Employee> getAllEmployeesBySalaryDesc() {
+        return employeeService.findAllOrderBySalaryDesc();
+    }
+    
     @GetMapping("/id")
     public Optional<Employee> getEmployeeById(@RequestParam("employeeId") Long employeeId) {
         return employeeService.findById(employeeId);
-    }
-
-    @GetMapping("/salaryBetween")
-    public List<Employee> getEmployeeBySalaryBetween(@RequestParam("minSalary") BigDecimal minSalary,
-                                                     @RequestParam("maxSalary") BigDecimal maxSalary) {
-        return employeeService.findBySalaryBetween(minSalary, maxSalary);
     }
 
     @GetMapping("/{employeeId}")

@@ -3,6 +3,7 @@ package org.example.zadania_rest_api.service;
 import org.example.zadania_rest_api.model.Employee;
 import org.example.zadania_rest_api.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,6 +32,14 @@ public class EmployeeService {
         return employeeRepository.findBySalaryBetween(min, max);
     }
 
+    public List<Employee> findAllOrderBySalaryDesc() {
+        return employeeRepository.findAll(Sort.by(Sort.Direction.DESC, "salary"));
+    }
+
+    public List<Employee> findAllOrderBySalaryAsc() {
+        return employeeRepository.findAll(Sort.by(Sort.Direction.ASC, "salary"));
+    }
+
     public Employee save(Employee employee) {
         return employeeRepository.save(employee);
     }
@@ -38,4 +47,5 @@ public class EmployeeService {
     public void deleteById(Long id) {
         employeeRepository.deleteById(id);
     }
+
 }
