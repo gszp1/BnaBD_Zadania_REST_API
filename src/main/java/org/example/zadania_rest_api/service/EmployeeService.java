@@ -46,6 +46,10 @@ public class EmployeeService {
         return employeeRepository.findAll(Sort.by(Sort.Direction.ASC, "salary"));
     }
 
+    public List<Employee> findAllByFirstLetterOfLastName(char firstLetter) {
+        return employeeRepository.findAllByFirstLetterOfLastName(firstLetter);
+    }
+
     public Employee save(Employee employee) {
         return employeeRepository.save(employee);
     }

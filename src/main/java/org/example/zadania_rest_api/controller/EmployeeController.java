@@ -48,6 +48,11 @@ public class EmployeeController {
         return employeeService.findAll(PageRequest.of(page, size));
     }
 
+    @GetMapping("all/byNameFirstLetter")
+    public List<Employee> getEmployeesByFirstLetterOfLastName(@RequestParam("letter") char letter) {
+        return employeeService.findAllByFirstLetterOfLastName(letter);
+    }
+
     @GetMapping("/id")
     public Optional<Employee> getEmployeeById(@RequestParam("employeeId") Long employeeId) {
         return employeeService.findById(employeeId);
