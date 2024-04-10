@@ -3,6 +3,8 @@ package org.example.zadania_rest_api.controller;
 import org.example.zadania_rest_api.model.Employee;
 import org.example.zadania_rest_api.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -40,7 +42,12 @@ public class EmployeeController {
     public List<Employee> getAllEmployeesBySalaryDesc() {
         return employeeService.findAllOrderBySalaryDesc();
     }
-    
+
+    @GetMapping("/all/paginated")
+    public Page<Employee> getEmployeesPage(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return employeeService.findAll(PageRequest.of(page, size));
+    }
+
     @GetMapping("/id")
     public Optional<Employee> getEmployeeById(@RequestParam("employeeId") Long employeeId) {
         return employeeService.findById(employeeId);
