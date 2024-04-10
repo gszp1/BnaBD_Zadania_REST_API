@@ -5,6 +5,7 @@ import org.example.zadania_rest_api.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,10 @@ public class EmployeeService {
 
     public List<Employee> findAll() {
         return employeeRepository.findAll();
+    }
+
+    public List<Employee> findBySalaryBetween(BigDecimal min, BigDecimal max) {
+        return employeeRepository.findBySalaryBetween(min, max);
     }
 
     public Employee save(Employee employee) {

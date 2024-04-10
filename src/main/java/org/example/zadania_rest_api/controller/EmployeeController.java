@@ -5,6 +5,7 @@ import org.example.zadania_rest_api.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,12 @@ public class EmployeeController {
     @GetMapping("/id")
     public Optional<Employee> getEmployeeById(@RequestParam("employeeId") Long employeeId) {
         return employeeService.findById(employeeId);
+    }
+
+    @GetMapping("/salaryBetween")
+    public List<Employee> getEmployeeBySalaryBetween(@RequestParam("minSalary") BigDecimal minSalary,
+                                                     @RequestParam("maxSalary") BigDecimal maxSalary) {
+        return employeeService.findBySalaryBetween(minSalary, maxSalary);
     }
 
     @GetMapping("/{employeeId}")
