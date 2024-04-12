@@ -7,6 +7,7 @@ import org.example.zadania_rest_api.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -79,6 +80,14 @@ public class DepartmentService {
 
     public Page<Department> findAll(Pageable pageable) {
         return departmentRepository.findAll(pageable);
+    }
+
+    public List<Department> findAllOrderByNameDesc() {
+        return departmentRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));
+    }
+
+    public List<Department> findAllOrderByNameAsc() {
+        return departmentRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
 }

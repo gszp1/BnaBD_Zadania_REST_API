@@ -81,4 +81,13 @@ public class DepartmentController {
         return departmentService.findAll(PageRequest.of(page, size));
     }
 
+    @GetMapping("/all/nameSortedDesc")
+    public List<Department> getAllOrderByNameDesc() {
+        return departmentService.findAllOrderByNameDesc();
+    }
+
+    @GetMapping("/all/nameSortedAsc")
+    public List<Department> getAllOrderByNameAsc() {
+        return departmentService.findAllOrderByNameAsc();
+    }
 }
