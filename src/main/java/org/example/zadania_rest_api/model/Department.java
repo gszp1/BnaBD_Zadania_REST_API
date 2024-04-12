@@ -76,7 +76,7 @@ public class Department {
     public void setEstablishmentDate(LocalDate establishmentDate) {
         this.establishmentDate = establishmentDate;
     }
-    
+
     @Override
     public String toString() {
         return "Department{" +
