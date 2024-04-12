@@ -1,6 +1,8 @@
 package org.example.zadania_rest_api;
 
+import org.example.zadania_rest_api.model.Department;
 import org.example.zadania_rest_api.model.Employee;
+import org.example.zadania_rest_api.repository.DepartmentRepository;
 import org.example.zadania_rest_api.repository.EmployeeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +16,8 @@ import java.util.Arrays;
 public class RunAtStart {
 
     @Bean
-    public CommandLineRunner commandLineRunner(EmployeeRepository employeeRepository) {
+    public CommandLineRunner commandLineRunner(EmployeeRepository employeeRepository,
+                                               DepartmentRepository departmentRepository) {
         return args -> {
             employeeRepository.saveAll(Arrays.asList(
                             new Employee(
@@ -31,6 +34,22 @@ public class RunAtStart {
                             )
                     )
             );
+            departmentRepository.saveAll(Arrays.asList(
+                            new Department(
+                                    "SoftwareDevelopment",
+                                    "DepartmentDescription",
+                                    new BigDecimal("100000.0"),
+                                    LocalDate.of(1999, 12, 1)
+                            ),
+                            new Department(
+                                    "DataAnalysis",
+                                    "DepartmentDescription",
+                                    new BigDecimal("200000"),
+                                    LocalDate.of(2001, 1, 12)
+                            )
+                    )
+            );
+
         };
     }
 }
