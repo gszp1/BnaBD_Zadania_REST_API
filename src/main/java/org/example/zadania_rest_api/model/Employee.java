@@ -25,6 +25,10 @@ public class Employee {
     @Column(name = "employment_date", nullable = false)
     private LocalDate employmentDate;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     protected Employee() {
         super();
     }

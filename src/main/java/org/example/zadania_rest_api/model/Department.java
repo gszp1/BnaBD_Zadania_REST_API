@@ -26,6 +26,9 @@ public class Department {
     @Column(nullable = false)
     private LocalDate establishmentDate;
 
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employees;
+
     protected Department() {
         super();
     }
