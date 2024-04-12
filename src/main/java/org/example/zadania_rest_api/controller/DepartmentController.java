@@ -69,5 +69,8 @@ public class DepartmentController {
         return departmentService.getAllEmployeesWithSalaryBetween(id, minSalary, maxSalary);
     }
 
-
+    @GetMapping("all/nameFirstLetter")
+    public List<Department> getAllDepartmentsByFirstLetter(@RequestParam("firstLetter") char firstLetter) {
+        return departmentService.getAllDepartmentsWithNamesStartingWith(firstLetter);
+    }
 }

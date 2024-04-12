@@ -70,4 +70,8 @@ public class DepartmentService {
                 .collect(Collectors.toList())
         ).orElseGet(List::of);
     }
+
+    public List<Department> getAllDepartmentsWithNamesStartingWith(char letter){
+        return departmentRepository.findDepartmentsByFirstLetterOfName(letter);
+    }
 }
