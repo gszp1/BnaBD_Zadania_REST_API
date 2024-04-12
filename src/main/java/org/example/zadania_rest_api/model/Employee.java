@@ -25,15 +25,21 @@ public class Employee {
     @Column(name = "employment_date", nullable = false)
     private LocalDate employmentDate;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     protected Employee() {
         super();
     }
 
-    public Employee(String firstName, String lastName, BigDecimal salary, LocalDate employmentDate) {
+    public Employee(String firstName, String lastName, BigDecimal salary,
+                    LocalDate employmentDate, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.employmentDate = employmentDate;
+        this.department = department;
     }
 
     public Long getId() {
@@ -74,6 +80,14 @@ public class Employee {
 
     public void setEmploymentDate(LocalDate employmentDate) {
         this.employmentDate = employmentDate;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @Override
