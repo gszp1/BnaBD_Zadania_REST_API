@@ -1,9 +1,11 @@
 package org.example.zadania_rest_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,8 +28,9 @@ public class Department {
     @Column(nullable = false)
     private LocalDate establishmentDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "department")
-    private List<Employee> employees;
+    private List<Employee> employees = new ArrayList<>();
 
     protected Department() {
         super();
@@ -78,6 +81,14 @@ public class Department {
 
     public void setEstablishmentDate(LocalDate establishmentDate) {
         this.establishmentDate = establishmentDate;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override

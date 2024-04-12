@@ -1,6 +1,7 @@
 package org.example.zadania_rest_api.controller;
 
 import org.example.zadania_rest_api.model.Department;
+import org.example.zadania_rest_api.model.Employee;
 import org.example.zadania_rest_api.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -47,5 +48,11 @@ public class DepartmentController {
     @PutMapping("/update")
     public Department updateDepartment(@RequestBody Department department) {
         return departmentService.saveDepartment(department);
+    }
+
+    @PostMapping("/{departmentId}/addEmployee")
+    public void addEmployeeToDepartment(@PathVariable("departmentId") Long departmentId,
+                                        @RequestBody Employee employee) {
+        departmentService.addEmployeeToDepartment(departmentId, employee);
     }
 }
