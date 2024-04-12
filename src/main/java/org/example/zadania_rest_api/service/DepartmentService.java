@@ -5,6 +5,8 @@ import org.example.zadania_rest_api.model.Employee;
 import org.example.zadania_rest_api.repository.DepartmentRepository;
 import org.example.zadania_rest_api.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -74,4 +76,9 @@ public class DepartmentService {
     public List<Department> getAllDepartmentsWithNamesStartingWith(char letter){
         return departmentRepository.findDepartmentsByFirstLetterOfName(letter);
     }
+
+    public Page<Department> findAll(Pageable pageable) {
+        return departmentRepository.findAll(pageable);
+    }
+
 }

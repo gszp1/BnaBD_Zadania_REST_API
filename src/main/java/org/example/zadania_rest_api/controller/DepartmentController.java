@@ -4,6 +4,8 @@ import org.example.zadania_rest_api.model.Department;
 import org.example.zadania_rest_api.model.Employee;
 import org.example.zadania_rest_api.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -69,8 +71,14 @@ public class DepartmentController {
         return departmentService.getAllEmployeesWithSalaryBetween(id, minSalary, maxSalary);
     }
 
-    @GetMapping("all/nameFirstLetter")
+    @GetMapping("/all/nameFirstLetter")
     public List<Department> getAllDepartmentsByFirstLetter(@RequestParam("firstLetter") char firstLetter) {
         return departmentService.getAllDepartmentsWithNamesStartingWith(firstLetter);
     }
+
+    @GetMapping("/all/paginated")
+    public Page<Department> getDepartmentsPage(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return departmentService.findAll(PageRequest.of(page, size));
+    }
+
 }
