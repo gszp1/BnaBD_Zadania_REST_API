@@ -6,6 +6,7 @@ import org.example.zadania_rest_api.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,4 +56,18 @@ public class DepartmentController {
                                         @RequestBody Employee employee) {
         departmentService.addEmployeeToDepartment(departmentId, employee);
     }
+
+    @GetMapping("/{id}/allByEmployeeSecondName")
+    public List<Employee> getAllByEmployeeSecondName(@PathVariable("id") Long id, @RequestParam("name") String name) {
+        return departmentService.getAllEmployeesByDepartmentIdAndEmployeeLastName(id, name);
+    }
+
+    @GetMapping("/{id}/allWithSalaryBetween")
+    public List<Employee> getAllBySalaryBetween(@PathVariable("id") Long id,
+                                                @RequestParam("minSalary") BigDecimal minSalary,
+                                                @RequestParam("maxSalary") BigDecimal maxSalary) {
+        return departmentService.getAllEmployeesWithSalaryBetween(id, minSalary, maxSalary);
+    }
+
+
 }

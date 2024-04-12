@@ -7,8 +7,10 @@ import org.example.zadania_rest_api.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DepartmentService {
@@ -47,5 +49,25 @@ public class DepartmentService {
             departmentRepository.save(dpt);
             employeeRepository.save(employee);
         });
+    }
+
+    public List<Employee> getAllEmployeesByDepartmentIdAndEmployeeLastName(Long departmentId, String lastName) {
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        return department.map(dpt -> dpt.getEmployees()
+                .stream()
+                .filter(employee -> employee.getLastName().equals(lastName))
+                .collect(Collectors.toList())
+        ).orElseGet(List::of);
+    }
+
+    public List<Employee> getAllEmployeesWithSalaryBetween(Long departmentId, BigDecimal minSalary, BigDecimal maxSalary) {
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        return department.map(value -> value
+                .getEmployees()
+                .stream()
+                .filter(employee -> (employee.getSalary().compareTo(minSalary) >= 0) &&
+                        (employee.getSalary().compareTo(maxSalary) <= 0))
+                .collect(Collectors.toList())
+        ).orElseGet(List::of);
     }
 }
